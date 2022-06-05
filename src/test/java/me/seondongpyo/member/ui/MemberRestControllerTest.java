@@ -94,6 +94,6 @@ class MemberRestControllerTest {
 			.andExpect(status().isNoContent());
 
 		assertThatThrownBy(() -> memberService.findById(id))
-			.isInstanceOf(IllegalStateException.class);
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 }
