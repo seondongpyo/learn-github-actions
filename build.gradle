@@ -41,6 +41,8 @@ jacocoTestReport {
         xml.enabled true
         html.enabled true
     }
+
+    finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
@@ -61,6 +63,8 @@ test {
     jacoco {
         destinationFile = file("${buildDir}/jacoco/jacoco.exec")
     }
+
+    finalizedBy 'jacocoTestReport'
 }
 
 task testCoverage(type: Test) {
