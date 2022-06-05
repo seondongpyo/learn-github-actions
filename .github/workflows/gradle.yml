@@ -34,9 +34,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Execute unit tests with coverage
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-      with:
-        arguments: clean test
+      run: ./gradlew clean test
 
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
