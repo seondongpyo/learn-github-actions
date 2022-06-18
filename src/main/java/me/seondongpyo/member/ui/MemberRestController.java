@@ -2,6 +2,7 @@ package me.seondongpyo.member.ui;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,27 +26,32 @@ public class MemberRestController {
 	private final MemberService memberService;
 
 	@PostMapping
-	public ResponseEntity<Member> create(@RequestBody Member request) {
-		Member member = memberService.create(request);
+	public ResponseEntity<MemberResponseDTO> create(@RequestBody MemberRequestDTO request) {
+		Member member = memberService.create(request.toEntity());
 		return ResponseEntity.created(URI.create("/api/members/" + member.getId()))
-			.body(member);
+			.body(new MemberResponseDTO(member));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Member> findById(@PathVariable Long id) {
-		return ResponseEntity.ok(memberService.findById(id));
+	public ResponseEntity<MemberResponseDTO> findById(@PathVariable Long id) {
+		Member member = memberService.findById(id);
+		return ResponseEntity.ok(new MemberResponseDTO(member));
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Member>> findAll() {
-		return ResponseEntity.ok(memberService.findAll());
+	public ResponseEntity<List<MemberResponseDTO>> findAll() {
+		List<MemberResponseDTO> members = memberService.findAll()
+			.stream()
+			.map(MemberResponseDTO::new)
+			.collect(Collectors.toList());
+		return ResponseEntity.ok(members);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@PathVariable Long id,
-										 @RequestBody Member request) {
+									   @RequestBody MemberRequestDTO request) {
 
-		memberService.update(id, request);
+		memberService.update(id, request.toEntity());
 		return ResponseEntity.ok().build();
 	}
 

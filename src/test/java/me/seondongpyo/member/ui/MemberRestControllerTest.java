@@ -39,7 +39,7 @@ class MemberRestControllerTest {
 	@DisplayName("새로운 회원을 등록한다.")
 	@Test
 	void create() throws Exception {
-		Member member = new Member("hong", 30);
+		MemberRequestDTO member = new MemberRequestDTO("hong", 30);
 
 		mvc.perform(post(BASE_URI)
 				.contentType(MediaType.APPLICATION_JSON)
@@ -63,16 +63,18 @@ class MemberRestControllerTest {
 		Member kim = memberService.create(new Member("kim", 20));
 		Member park = memberService.create(new Member("park", 30));
 
+		List<MemberResponseDTO> response = List.of(new MemberResponseDTO(kim), new MemberResponseDTO(park));
+
 		mvc.perform(get(BASE_URI))
 			.andExpect(status().isOk())
-			.andExpect(content().json(objectMapper.writeValueAsString(List.of(kim, park))));
+			.andExpect(content().json(objectMapper.writeValueAsString(response)));
 	}
 
 	@DisplayName("회원을 수정한다.")
 	@Test
 	void update() throws Exception {
 		Member kim = memberService.create(new Member("kim", 20));
-		Member updateParam = new Member("hong", 30);
+		MemberRequestDTO updateParam = new MemberRequestDTO("hong", 30);
 
 		mvc.perform(put(BASE_URI + "/{id}", kim.getId())
 				.contentType(MediaType.APPLICATION_JSON)
