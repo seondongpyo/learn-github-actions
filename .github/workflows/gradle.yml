@@ -36,7 +36,7 @@ jobs:
     - name: Execute unit tests with coverage
       run: ./gradlew clean test
       env:
-        TEST: ${{ secrets.TEST }}
+        github.actions.variable: ${{ secrets.TEST }}
 
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
