@@ -37,6 +37,7 @@ jobs:
       run: ./gradlew clean test
       env:
         github.actions.variable: ${{ secrets.TEST }}
+        test.variable: "secrets test"
 
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0

@@ -9,12 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class LearnGithubActionsApplicationTests {
 
-	@Value("${github.actions.variable}")
+	@Value("${test.variable}")
 	private String variable;
 
 	@Test
 	void contextLoads() {
-		assertThat(variable).isEqualTo("Github Actions");
+		assertThat(variable).isEqualTo("secrets test");
 	}
 
 }
