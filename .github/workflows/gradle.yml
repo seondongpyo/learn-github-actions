@@ -34,7 +34,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Create application-dev.properties
-      run:
+      run: |
         cd ./src/main/resources
         touch ./application-dev.properties
         echo "${{ secrets.PROPERTIES_DEV }}" > ./application-dev.properties
