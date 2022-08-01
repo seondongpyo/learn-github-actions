@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@PropertySource("classpath:/application-dev.properties")
+@PropertySource("classpath:application-dev.properties")
 class LearnGithubActionsApplicationTests {
 
 	@Value("${test.variable}")

@@ -37,7 +37,7 @@ jobs:
       run: |
         cd ./src/main/resources
         touch ./application-dev.properties
-        echo "${{ secrets.PROPERTIES_DEV }}" > ./application-dev.properties
+        echo ${{ secrets.PROPERTIES_DEV }} > ./application-dev.properties
       shell: bash
 
     - name: Execute unit tests with coverage
